@@ -19,7 +19,7 @@ export default function Venue({
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="venue-map-card"
         >
-         <img src="/public/venue.png" alt="" />
+         <img src="/venue.png" alt="" />
         </motion.div>
 
         {/* Right Content */}

@@ -10,22 +10,22 @@ const DEFAULT_STEPS = [
   {
     label: "The Engagement",
     detail: "Families gathered to bless.",
-    image:"/public/engagement.png"
+    image:"/engagement.png"
   },
   {
     label: "The Planning",
     detail: "Months of dreaming, choosing.",
-    image:"/public/planning.png"
+    image:"/planning.png"
   },
   {
     label: "The Invitation",
     detail: "A story ready to be shared with you.",
-    image:"/public/invitation.png",
+    image:"/invitation.png",
   },
   {
     label: "The Celebration",
     detail: "Five days of rituals, music, and joy.",
-    image:"/public/celebration.png",
+    image:"/celebration.png",
   },
 ];
 

@@ -10,42 +10,42 @@ import "./Gallery.css";
 const DEFAULT_PHOTOS = [
   {
     id: 1,
-    src: "/public/gallery-1.png",
+    src: "/gallery-1.png",
     tall: true,
   },
   {
     id: 2,
-    src: "/public/gallery-2.png",
+    src: "/gallery-2.png",
     tall: false,
   },
   {
     id: 3,
-    src: "/public/gallery-3.png",
+    src: "/gallery-3.png",
     tall: false,
   },
   {
     id: 4,
-    src: "/public/gallery-4.png",
+    src: "/gallery-4.png",
     tall: true,
   },
   {
     id: 5,
-    src: "/public/gallery-5.png",
+    src: "/gallery-5.png",
     tall: false,
   },
   {
     id: 6,
-    src: "/public/gallery-6.png",
+    src: "/gallery-6.png",
     tall: false,
   },
   {
     id: 7,
-    src: "/public/gallery-7.png",
+    src: "/gallery-7.png",
     tall: true,
   },
   {
     id: 8,
-    src: "/public/gallery-8.png",
+    src: "/gallery-8.png",
     tall: false,
   },
 ];
