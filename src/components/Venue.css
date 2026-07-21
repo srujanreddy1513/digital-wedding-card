@@ -1,0 +1,134 @@
+.venue-section {
+  width: 100%;
+  height: 100vh;
+  padding: 120px 8%;
+  background-image:
+  linear-gradient(
+    rgba(248, 244, 239, 0.85),
+    rgba(248, 244, 239, 0.85)
+  ),
+  url('/bg-3.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  position: relative;
+  overflow: hidden;
+  color: #f8f5ef;
+}
+
+.venue-container {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 80px;
+  align-items: center;
+}
+
+.venue-map-card {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(18px);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(198, 161, 91, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+}
+
+.venue-svg {
+  width: 75%;
+  height: 75%;
+}
+
+.venue-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.venue-subtitle {
+  font-size: 23px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #9c7a3c;
+  margin-bottom: 18px;
+}
+
+
+.venue-title {
+  font-size: 4.0rem;
+  line-height: 1.1;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #222;
+  margin-bottom: 24px;
+}
+
+.venue-address {
+  font-size: 23px;
+  color: #666;
+  line-height: 1.6;
+  max-width: 500px;
+  margin-bottom: 40px;
+}
+
+.venue-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 16px 38px;
+  background: #b58a3c;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 50px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  transition: all 0.35s ease;
+}
+
+.venue-button:hover {
+  background: #946f2f;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(181, 138, 60, 0.3);
+}
+
+@media (max-width: 900px) {
+  .venue-container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .venue-title {
+    font-size: 3rem;
+  }
+
+  .venue-map-card {
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .venue-section {
+    padding: 80px 20px;
+  }
+
+  .venue-title {
+    font-size: 2.4rem;
+  }
+
+  .venue-address {
+    font-size: 16px;
+  }
+
+  .venue-button {
+    width: 100%;
+    text-align: center;
+  }
+}

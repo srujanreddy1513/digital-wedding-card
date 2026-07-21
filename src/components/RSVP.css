@@ -1,0 +1,220 @@
+/* ==========================
+   RSVP Section
+========================== */
+
+.rsvp-section{
+    position:relative;
+    padding:100px 8%;
+    background-image:
+  linear-gradient(
+    rgba(248, 244, 239, 0.85),
+    rgba(248, 244, 239, 0.85)
+  ),
+  url('/bg-3.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating Flowers */
+
+.flower{
+    position:absolute;
+    font-size:34px;
+    opacity:.25;
+    pointer-events:none;
+    user-select:none;
+}
+
+/* ==========================
+   Heading
+========================== */
+
+.rsvp-container{
+    position:relative;
+    max-width:700px;
+    margin:auto;
+}
+
+.rsvp-heading{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-label{
+    text-transform:uppercase;
+    letter-spacing:4px;
+    color:#b8893e;
+    font-size:13px;
+}
+
+.rsvp-heading h2{
+    margin-top:12px;
+    font-size:58px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:#222;
+}
+
+.divider{
+    width:90px;
+    height:2px;
+    background:#caa45d;
+    margin:24px auto 0;
+}
+
+/* ==========================
+   Glass Card
+========================== */
+
+.rsvp-card{
+    background:rgba(255,255,255,.6);
+    backdrop-filter:blur(18px);
+    border-radius:30px;
+    padding:50px;
+    border:1px solid rgba(255,255,255,.8);
+    box-shadow:0 15px 45px rgba(0,0,0,.08);
+}
+
+/* ==========================
+   Form
+========================== */
+
+.rsvp-form{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:#b8893e;
+    margin-bottom:12px;
+}
+
+/* Inputs */
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+
+    width:100%;
+    border:none;
+    border-bottom:1px solid rgba(184,137,62,.4);
+    background:transparent;
+    padding:12px 4px;
+    font-size:16px;
+    transition:.3s;
+    outline:none;
+    color:#333;
+}
+
+.form-group textarea{
+    resize:none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+
+    border-color:#b8893e;
+}
+
+/* ==========================
+   Button
+========================== */
+
+.submit-btn{
+
+    align-self:center;
+
+    background:linear-gradient(135deg,#cda95b,#b8893e);
+
+    color:white;
+
+    border:none;
+
+    padding:15px 42px;
+
+    border-radius:40px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.35s;
+}
+
+.submit-btn:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.18);
+}
+
+/* ==========================
+   Thank You
+========================== */
+
+.thank-you{
+
+    text-align:center;
+
+    padding:25px;
+}
+
+.thank-you h3{
+
+    margin:28px 0 12px;
+
+    font-size:38px;
+
+    color:#222;
+
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.thank-you p{
+
+    color:#666;
+
+    font-size:17px;
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media(max-width:768px){
+
+.rsvp-section{
+
+    padding:70px 20px;
+}
+
+.rsvp-heading h2{
+
+    font-size:42px;
+}
+
+.rsvp-card{
+
+    padding:35px 25px;
+}
+
+.submit-btn{
+
+    width:100%;
+}
+
+}

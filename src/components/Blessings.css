@@ -1,0 +1,96 @@
+.blessings-section {
+  padding: 100px 20px;
+  background: #1f4d3b;
+  color: #fdfaf3;
+}
+
+.blessings-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.blessings-subtitle {
+  display: inline-block;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: rgba(230, 201, 139, 0.85);
+}
+
+.blessings-title {
+  margin-top: 15px;
+  font-size: 3.8rem;
+  font-weight: 500;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #fff;
+}
+
+.blessings-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.blessing-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 220px;
+  padding: 35px;
+  border-radius: 22px;
+  border: 1px solid rgba(230, 201, 139, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  transition: all 0.35s ease;
+}
+
+.blessing-card:hover {
+  border-color: rgba(230, 201, 139, 0.6);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+.blessing-text {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.45rem;
+  font-style: italic;
+  line-height: 1.7;
+  color: #fdfaf3;
+}
+
+.blessing-author {
+  margin-top: 25px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(230, 201, 139, 0.75);
+}
+
+@media (max-width: 900px) {
+  .blessings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .blessings-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .blessings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blessings-title {
+    font-size: 2.4rem;
+  }
+
+  .blessing-card {
+    padding: 25px;
+  }
+
+  .blessing-text {
+    font-size: 1.25rem;
+  }
+}

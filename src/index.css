@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: auto; /* Lenis handles smoothing */
+}
+
+body {
+  @apply bg-ivory text-luxblack font-body antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #C6A15B;
+  color: #FFF8F0;
+}
+
+/* ---------- Design-system utility classes, reused across every section ---------- */
+
+.eyebrow {
+  @apply font-eyebrow text-xs md:text-sm tracking-widest2 uppercase text-gold-deep;
+}
+
+.display-title {
+  @apply font-display font-medium text-luxblack leading-[1.05];
+}
+
+.gold-text {
+  background: linear-gradient(120deg, #9C7A3C 0%, #E4C98B 45%, #C6A15B 55%, #9C7A3C 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sheen 6s linear infinite;
+}
+
+@keyframes sheen {
+  to { background-position: 200% center; }
+}
+
+.glass-card {
+  @apply backdrop-blur-xl bg-white/40 border border-gold-light/40 shadow-glass rounded-[2rem];
+}
+
+.divider-line {
+  @apply w-16 h-[1.5px] bg-gold-deep/70 mx-auto;
+}
+
+.gold-btn {
+  @apply relative inline-flex items-center gap-3 px-8 py-3 rounded-full font-eyebrow text-[0.7rem] tracking-widest2 uppercase text-ivory bg-luxblack overflow-hidden transition-transform duration-500 hover:-translate-y-0.5;
+}
+
+.gold-btn::before {
+  content: '';
+  @apply absolute inset-0 bg-gold-sheen opacity-0 transition-opacity duration-500;
+  background-size: 200% auto;
+}
+
+.gold-btn:hover::before {
+  @apply opacity-100;
+}
+
+.gold-btn span {
+  @apply relative z-10;
+}
+
+.ghost-btn {
+  @apply inline-flex items-center gap-2 px-7 py-3 rounded-full font-eyebrow text-[0.7rem] tracking-widest2 uppercase border border-gold-deep/60 text-gold-deep hover:bg-gold-deep hover:text-ivory transition-colors duration-500;
+}
+
+/* section rhythm */
+.section {
+  @apply relative w-full py-28 md:py-36 px-6 md:px-12 lg:px-24 overflow-hidden;
+}
+
+/* soft film-grain overlay for cinematic feel, applied globally */
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

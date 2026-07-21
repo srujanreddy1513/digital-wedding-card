@@ -1,0 +1,203 @@
+/* ---------------------------
+   Wedding Events Section
+---------------------------- */
+
+.wedding-events {
+  padding: 100px 8%;
+  background-image:
+  linear-gradient(
+    rgba(248, 244, 239, 0.85),
+    rgba(248, 244, 239, 0.85)
+  ),
+  url('/bg-3.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #b8860b;
+  font-size: 23px;
+}
+
+.heading h2 {
+  font-size: 58px;
+  margin-top: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #222;
+}
+
+.divider {
+  width: 90px;
+  height: 2px;
+  background: #c7a35d;
+  margin: 25px auto 0;
+}
+
+/* ---------------------------
+   Grid
+---------------------------- */
+
+.events-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 30px;
+  perspective: 1200px;
+}
+
+/* ---------------------------
+   Card
+---------------------------- */
+
+.event-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  border-radius: 28px;
+  overflow: hidden;
+  min-height: 270px;
+  padding: 35px;
+  cursor: pointer;
+  transition: 0.45s;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.event-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------------------------
+   Gradient Overlay
+---------------------------- */
+
+.event-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: .5s;
+}
+
+.event-card:hover .event-overlay {
+  opacity: 1;
+}
+
+.gold .event-overlay {
+  background: linear-gradient(135deg,
+      rgba(245, 196, 74, .35),
+      transparent);
+}
+
+.green .event-overlay {
+  background: linear-gradient(135deg,
+      rgba(58, 128, 88, .30),
+      transparent);
+}
+
+.rose .event-overlay {
+  background: linear-gradient(135deg,
+      rgba(214, 144, 158, .35),
+      transparent);
+}
+
+.maroon .event-overlay {
+  background: linear-gradient(135deg,
+      rgba(120, 25, 45, .25),
+      transparent);
+}
+
+.gold-dark .event-overlay {
+  background: linear-gradient(135deg,
+      rgba(183, 146, 63, .35),
+      transparent);
+}
+
+/* ---------------------------
+   Content
+---------------------------- */
+
+.event-content {
+  position: relative;
+  z-index: 2;
+}
+
+.event-date {
+  color: #b8860b;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.event-title {
+  margin-top: 18px;
+  font-size: 40px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #222;
+}
+
+.event-description {
+  margin-top: 35px;
+  color: #666;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+/* ---------------------------
+   Arrow
+---------------------------- */
+
+.event-arrow {
+  position: absolute;
+  right: 30px;
+  bottom: 25px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid #b8860b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #b8860b;
+  opacity: 0;
+  transition: .4s;
+  z-index: 3;
+}
+
+.event-card:hover .event-arrow {
+  opacity: 1;
+}
+
+/* ---------------------------
+   Responsive
+---------------------------- */
+
+@media (max-width:768px) {
+  .wedding-events {
+    padding: 70px 20px;
+  }
+
+  .heading h2 {
+    font-size: 42px;
+  }
+
+  .event-title {
+    font-size: 32px;
+  }
+
+  .event-card {
+    padding: 28px;
+  }
+}
