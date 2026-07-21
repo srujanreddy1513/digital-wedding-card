@@ -6,25 +6,25 @@ const DEFAULT_MOMENTS = [
     year: "2019",
     title: "First Meeting",
     text: "A chance introduction at a mutual friend's wedding.",
-    image: "/public/2019-first meeting.png",
+    image: "/2019-first meeting.png",
   },
   {
     year: "2021",
     title: "The First Trip",
     text: "Two weeks in the hills that changed everything.",
-    image: "/public/2021.png",
+    image: "/2021.png",
   },
   {
     year: "2023",
     title: "The Proposal",
     text: "Under the same stars where they first spoke.",
-    image: "/public/2023.png",
+    image: "/2023.png",
   },
   {
     year: "2026",
     title: "The Wedding",
     text: "Two families, one celebration.",
-    image: "/public/2026.png",
+    image: "/2026.png",
   },
 ];
 
