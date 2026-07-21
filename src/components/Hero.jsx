@@ -16,6 +16,7 @@ export default function Hero() {
   const currentFrameRef = useRef(0); // eased frame actually drawn
   const targetFrameRef = useRef(0); // frame implied by scroll position
   const rafRef = useRef(null);
+  const cssSizeRef = useRef({ width: 0, height: 0 }); // logical (CSS) canvas size
 
   const [loaded, setLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -82,8 +83,14 @@ export default function Hero() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
-    const cw = canvas.width;
-    const ch = canvas.height;
+    // Use the LOGICAL (CSS) size here, not canvas.width/height.
+    // canvas.width/height are already multiplied by devicePixelRatio,
+    // and ctx.setTransform(dpr, ...) (set in resize()) scales every
+    // draw call by dpr again. Drawing with canvas.width/height here
+    // would double-apply the dpr scale (dpr^2), which is what caused
+    // the zoomed-in / cropped image on high-DPR mobile screens.
+    const { width: cw, height: ch } = cssSizeRef.current;
+    if (!cw || !ch) return;
 
     const lower = Math.floor(floatIndex);
     const upper = Math.min(lower + 1, FRAME_COUNT - 1);
@@ -107,6 +114,7 @@ export default function Hero() {
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.parentElement.getBoundingClientRect();
+      cssSizeRef.current = { width: rect.width, height: rect.height };
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
       const ctx = canvas.getContext("2d");
@@ -116,7 +124,15 @@ export default function Hero() {
 
     resize();
     window.addEventListener("resize", resize);
-    return () => window.removeEventListener("resize", resize);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", resize);
+    }
+    return () => {
+      window.removeEventListener("resize", resize);
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener("resize", resize);
+      }
+    };
   }, [loaded]);
 
   // Compute the target frame from current scroll position (called every
