@@ -17,6 +17,11 @@ export default function Hero() {
   const targetFrameRef = useRef(0); // frame implied by scroll position
   const rafRef = useRef(null);
   const cssSizeRef = useRef({ width: 0, height: 0 }); // logical (CSS) canvas size
+  const stableViewportHeightRef = useRef(
+    typeof window !== "undefined" ? window.innerHeight : 0
+  ); // viewport height used for scroll math — only updated on a REAL resize,
+  // not on every mobile address-bar show/hide during scrolling
+  const lastLayoutSizeRef = useRef({ width: 0, height: 0 }); // last size resize() actually applied
 
   const [loaded, setLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -106,14 +111,47 @@ export default function Hero() {
     }
   };
 
-  // Resize canvas to fill its container at device pixel ratio
+  // Resize canvas to fill its container at device pixel ratio.
+  //
+  // On mobile browsers, the address bar hiding/showing while you scroll
+  // fires "resize" (and visualViewport "resize") events continuously, with
+  // only the height changing by a small amount each time. If we react to
+  // every one of these by resetting canvas.width/height, we clear the
+  // canvas and force a redraw dozens of times per second WHILE the user is
+  // scrolling — that's the flicker and the "too fast"/jumpy playback you
+  // saw. So we debounce, and we ignore resizes that are just the mobile
+  // chrome toggling (small height-only changes) — those don't need the
+  // canvas or scroll math to change at all.
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const resize = () => {
+    const ADDRESS_BAR_THRESHOLD = 150; // px — typical mobile browser chrome height
+
+    const applyResize = () => {
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.parentElement.getBoundingClientRect();
+      const last = lastLayoutSizeRef.current;
+
+      const widthChanged = Math.abs(rect.width - last.width) > 1;
+      const heightChanged = Math.abs(rect.height - last.height) > 1;
+      const isFirstRun = last.width === 0 && last.height === 0;
+
+      // Only a height change, and small enough to be address-bar chrome —
+      // update the stable viewport height reference (so scroll math stays
+      // accurate) but skip touching the canvas entirely.
+      if (
+        !isFirstRun &&
+        !widthChanged &&
+        heightChanged &&
+        Math.abs(rect.height - last.height) < ADDRESS_BAR_THRESHOLD
+      ) {
+        return;
+      }
+
+      lastLayoutSizeRef.current = { width: rect.width, height: rect.height };
+      stableViewportHeightRef.current = window.innerHeight;
+
       cssSizeRef.current = { width: rect.width, height: rect.height };
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
@@ -122,16 +160,20 @@ export default function Hero() {
       drawFrame(currentFrameRef.current);
     };
 
-    resize();
-    window.addEventListener("resize", resize);
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", resize);
-    }
+    let debounceTimer = null;
+    const debouncedResize = () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(applyResize, 150);
+    };
+
+    applyResize(); // run once immediately on mount
+    window.addEventListener("resize", debouncedResize);
+    window.addEventListener("orientationchange", debouncedResize);
+
     return () => {
-      window.removeEventListener("resize", resize);
-      if (window.visualViewport) {
-        window.visualViewport.removeEventListener("resize", resize);
-      }
+      clearTimeout(debounceTimer);
+      window.removeEventListener("resize", debouncedResize);
+      window.removeEventListener("orientationchange", debouncedResize);
     };
   }, [loaded]);
 
@@ -142,7 +184,13 @@ export default function Hero() {
     if (!wrapper) return;
 
     const rect = wrapper.getBoundingClientRect();
-    const scrollableDistance = wrapper.offsetHeight - window.innerHeight;
+    // Use the cached stable viewport height, not the live window.innerHeight.
+    // On mobile, window.innerHeight fluctuates continuously while the
+    // address bar animates in/out during a scroll gesture. Reading it live
+    // here (called every rAF tick) made the target frame — and therefore
+    // the visible playback speed — jitter mid-scroll.
+    const viewportHeight = stableViewportHeightRef.current || window.innerHeight;
+    const scrollableDistance = wrapper.offsetHeight - viewportHeight;
     if (scrollableDistance <= 0) return;
 
     // How far we've scrolled into the wrapper (0 at top, 1 at bottom)
